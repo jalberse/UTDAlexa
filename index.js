@@ -47,6 +47,49 @@ const ParkingOptions = {
   }
 };
 
+/*
+rp(ParkingOptions)
+            .then(($) => {
+                const color = 'orange'; // TODO: Update with slot
+                var speechText = 'There are ';
+                
+                $('tbody').each(function(i,elem){
+                    var cnt = 0;
+                    if (color === 'green'){
+                        $(this).find('.parking_green').next().each(function(j,elem){
+                            cnt += parseInt($(this).text(),10);
+                        })
+                    }
+                    if (color === 'gold'){
+                        $(this).find('.parking_gold').next().each(function(j,elem){
+                            cnt += parseInt($(this).text(),10);
+                        })
+                    }
+                    if (color === 'orange'){
+                        $(this).find('.parking_orange').next().each(function(j,elem){
+                            cnt += parseInt($(this).text(),10);
+                        })
+                    }
+                    if (color === 'purple'){
+                        $(this).find('.parking_purple').next().each(function(j,elem){
+                            cnt += parseInt($(this).text(),10);
+                        })
+                    }
+                    if (i === 2) {
+                        speechText += "and " + cnt + " spots in P.S." + (i + 1) + ".";
+                    }
+                    else speechText += cnt + " spots in P.S." + (i + 1) + ",\n";
+                })
+
+                speechText += "\n" + $('.centertight','tfoot').first().text();
+                console.log(speechText);
+            })
+            .catch((err) => {
+                console.log(err);
+                speechText = 'We do not have the meats';
+                console.log(speechText);
+        });
+*/
 
 // Get parking information
 const FindParkingIntentHandler = {
@@ -57,20 +100,48 @@ const FindParkingIntentHandler = {
     handle(handlerInput){
         var speechText = 'We'
 
-        // TODO: We need to wait to return until this request is done
         return rp(ParkingOptions)
             .then(($) => {
-                speechText = 'We have the meats';
-                return handlerInput.responseBuilder
-                    .speak(speechText)
-                    .getResponse(); 
+                const color = 'orange'; // TODO: Update with slot
+                var speechText = 'There are ';
+    
+              $('tbody').each(function(i,elem){
+                    var cnt = 0;
+                    if (color === 'green'){
+                        $(this).find('.parking_green').next().each(function(j,elem){
+                            cnt += parseInt($(this).text(),10);
+                        })
+                    }
+                    if (color === 'gold'){
+                        $(this).find('.parking_gold').next().each(function(j,elem){
+                            cnt += parseInt($(this).text(),10);
+                        })
+                    }
+                    if (color === 'orange'){
+                        $(this).find('.parking_orange').next().each(function(j,elem){
+                            cnt += parseInt($(this).text(),10);
+                        })
+                    }
+                    if (color === 'purple'){
+                        $(this).find('.parking_purple').next().each(function(j,elem){
+                            cnt += parseInt($(this).text(),10);
+                        })
+                    }
+                if (i === 2) {
+                    speechText += "and " + cnt + " spots in Parking Structure " + (i + 1) + ".";
+                }
+                else speechText += cnt + " spots in Parking Structure " + (i + 1) + ",\n";
+            })
+
+            speechText += "\n" + $('.centertight','tfoot').first().text();
+            return handlerInput.responseBuilder
+                .speak(speechText)
+                .getResponse();
             })
             .catch((err) => {
                 console.log(err);
                 speechText = 'We do not have the meats';
-                return handlerInput.responseBuilder
-                .speak(speechText)
-                .getResponse();
+                console.log(speechText);
         });
     }
 }
@@ -155,6 +226,7 @@ const ErrorHandler = {
 // This handler acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
 // defined are included below. The order matters - they're processed top to bottom.
+
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
