@@ -47,50 +47,6 @@ const ParkingOptions = {
   }
 };
 
-/*
-rp(ParkingOptions)
-            .then(($) => {
-                const color = 'orange'; // TODO: Update with slot
-                var speechText = 'There are ';
-                
-                $('tbody').each(function(i,elem){
-                    var cnt = 0;
-                    if (color === 'green'){
-                        $(this).find('.parking_green').next().each(function(j,elem){
-                            cnt += parseInt($(this).text(),10);
-                        })
-                    }
-                    if (color === 'gold'){
-                        $(this).find('.parking_gold').next().each(function(j,elem){
-                            cnt += parseInt($(this).text(),10);
-                        })
-                    }
-                    if (color === 'orange'){
-                        $(this).find('.parking_orange').next().each(function(j,elem){
-                            cnt += parseInt($(this).text(),10);
-                        })
-                    }
-                    if (color === 'purple'){
-                        $(this).find('.parking_purple').next().each(function(j,elem){
-                            cnt += parseInt($(this).text(),10);
-                        })
-                    }
-                    if (i === 2) {
-                        speechText += "and " + cnt + " spots in P.S." + (i + 1) + ".";
-                    }
-                    else speechText += cnt + " spots in P.S." + (i + 1) + ",\n";
-                })
-
-                speechText += "\n" + $('.centertight','tfoot').first().text();
-                console.log(speechText);
-            })
-            .catch((err) => {
-                console.log(err);
-                speechText = 'We do not have the meats';
-                console.log(speechText);
-        });
-*/
-
 // Get parking information
 const FindParkingIntentHandler = {
     canHandle(handlerInput){
