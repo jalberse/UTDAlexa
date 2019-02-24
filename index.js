@@ -168,10 +168,18 @@ const getContactInfoIntentHandler = {
 // *****
 // END CONTACT
 
-
+/*
+var options = {
+    uri:`https://coursebook.utdallas.edu/search/searchresults/now/cs1336`,
+    transform: function(body){
+        return cheerio.load(body);
+    }
+  };
+*/
 // **********
 // COURSE DESCRIPTION
 
+/*
 const getCourseDescriptionIntentHandler = {
     canHandle(handlerInput){
        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -180,20 +188,12 @@ const getCourseDescriptionIntentHandler = {
     handle(handlerInput){
         var course= handlerInput.requestEnvelope.request.intent.slots.COURSE.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         var speechText = course;
-        
-        var options = {
-          uri:`https://coursebook.utdallas.edu/search/searchresults/now/`+course,
-          transform: function(body){
-              return cheerio.load(body);
-          }
-        };
         return rp(options)
             .then(($)=> {
                 var text = $('#searchresults').text();
                 indexParen = text.indexOf('(');
                 numClassText = text.substring(indexParen+1,indexParen+2);
-                //speechText='There are ' + numClassText + ' sections available of ' + course;
-                speechText = numClassText;
+                speechText='There are ' + numClassText + ' sections available of ' + course;
                 return handlerInput.responseBuilder
                     .speak(speechText)
                     .getResponse();
@@ -207,7 +207,7 @@ const getCourseDescriptionIntentHandler = {
             })
     }
  };
- 
+ */
 
 // ******
 // END COURSE DESCRIPTIONS
@@ -315,14 +315,13 @@ const ErrorHandler = {
 // This handler acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
 // defined are included below. The order matters - they're processed top to bottom.
-
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         FindParkingIntentHandler,
         GetFactIntentHandler,
         getContactInfoIntentHandler,
-        getCourseDescriptionIntentHandler,
+        //getCourseDescriptionIntentHandler,
         getLocationIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
