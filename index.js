@@ -168,6 +168,7 @@ const getContactInfoIntentHandler = {
 // *****
 // END CONTACT
 
+
 // **********
 // COURSE DESCRIPTION
 
@@ -178,7 +179,8 @@ const getCourseDescriptionIntentHandler = {
     },
     handle(handlerInput){
         var course= handlerInput.requestEnvelope.request.intent.slots.COURSE.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        var speechText;
+        var speechText = course;
+        
         var options = {
           uri:`https://coursebook.utdallas.edu/search/searchresults/now/`+course,
           transform: function(body){
@@ -187,16 +189,25 @@ const getCourseDescriptionIntentHandler = {
         };
         return rp(options)
             .then(($)=> {
-                speechText=$('.courseinfo_overviewtalbe_td').text;
+                var text = $('#searchresults').text();
+                indexParen = text.indexOf('(');
+                numClassText = text.substring(indexParen+1,indexParen+2);
+                //speechText='There are ' + numClassText + ' sections available of ' + course;
+                speechText = numClassText;
                 return handlerInput.responseBuilder
                     .speak(speechText)
                     .getResponse();
             })
             .catch((err) => {
                 console.log(err.message);
+                speechText='Sorry, I had some problems getting that course information.';
+                return handlerInput.responseBuilder
+                    .speak(speechText)
+                    .getResponse();
             })
     }
  };
+ 
 
 // ******
 // END COURSE DESCRIPTIONS
