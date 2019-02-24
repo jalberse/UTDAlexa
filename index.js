@@ -18,6 +18,9 @@ const LaunchRequestHandler = {
     }
 };
 
+// ***********************
+// Class description intent handling
+
 // TODO: Replace with Scalley's code
 const GetLocationIntentHandler = {
     canHandle(handlerInput){
@@ -31,6 +34,9 @@ const GetLocationIntentHandler = {
            .getResponse();
  }
 };
+
+// *******************
+// End class description intent handling
 
 // *******************
 // Parking intent 
