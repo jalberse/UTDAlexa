@@ -47,6 +47,7 @@ const ParkingOptions = {
   }
 };
 
+
 // Get parking information
 const FindParkingIntentHandler = {
     canHandle(handlerInput){
@@ -56,18 +57,21 @@ const FindParkingIntentHandler = {
     handle(handlerInput){
         var speechText = 'We'
 
-        rp(ParkingOptions)
+        // TODO: We need to wait to return until this request is done
+        return rp(ParkingOptions)
             .then(($) => {
                 speechText = 'We have the meats';
-                 })
+                return handlerInput.responseBuilder
+                    .speak(speechText)
+                    .getResponse(); 
+            })
             .catch((err) => {
                 console.log(err);
                 speechText = 'We do not have the meats';
+                return handlerInput.responseBuilder
+                .speak(speechText)
+                .getResponse();
         });
-
-        return handlerInput.responseBuilder
-            .speak(speechText)
-            .getResponse();
     }
 }
 
