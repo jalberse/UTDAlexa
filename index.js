@@ -47,9 +47,6 @@ const ParkingOptions = {
   }
 };
 
-
-// TODO: Alexa should ask which parking garage thru dialogue
-
 // Get parking information
 const FindParkingIntentHandler = {
     canHandle(handlerInput){
@@ -57,22 +54,20 @@ const FindParkingIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'FindParkingIntent';
     },
     handle(handlerInput){
-        rp(ParkingOptions)
-            .then(function (data) {
-                // We have the meats - get the parking information and tell it to the user
-                return handlerInput.responseBuilder
-                    .speak("We have the meats!") // TODO: actually handle data
-                    .getResponse();
-            })
-            .catch(function (err) {
-                console.log(`~~~~ Error handled: ${err.message}`);
-                const speechText = `Sorry, I don't have access to that information right now.`;
+        var speechText = 'We'
 
-                return handlerInput.responseBuilder
-                    .speak(speechText)
-                .reprompt(speechText)
-                .getResponse();
-            });
+        rp(ParkingOptions)
+            .then(($) => {
+                speechText = 'We have the meats';
+                 })
+            .catch((err) => {
+                console.log(err);
+                speechText = 'We do not have the meats';
+        });
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .getResponse();
     }
 }
 
