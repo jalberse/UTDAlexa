@@ -20,8 +20,10 @@ const LaunchRequestHandler = {
 
 // ***********************
 // Class description intent handling
-
 // TODO: Replace with Scalley's code
+// *******************
+// End class description intent handling
+
 const GetLocationIntentHandler = {
     canHandle(handlerInput){
       return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -34,9 +36,6 @@ const GetLocationIntentHandler = {
            .getResponse();
  }
 };
-
-// *******************
-// End class description intent handling
 
 // *******************
 // Parking intent 
@@ -160,8 +159,8 @@ const ErrorHandler = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
-        FindParkingIntentHandler,
         GetLocationIntentHandler,
+        FindParkingIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
