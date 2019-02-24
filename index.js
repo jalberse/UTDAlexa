@@ -81,7 +81,7 @@ const FindParkingIntentHandler = {
                 console.log(speechText);
         });
     }
-}
+};
 
 // ********
 // END PARKING INTENT
@@ -163,23 +163,18 @@ const getContactInfoIntentHandler = {
            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
            .getResponse();
    }
-}
+};
 
 // *****
 // END CONTACT
 
-/*
-var options = {
-    uri:`https://coursebook.utdallas.edu/search/searchresults/now/cs1336`,
-    transform: function(body){
-        return cheerio.load(body);
-    }
-  };
-*/
+
+
+
 // **********
 // COURSE DESCRIPTION
 
-/*
+
 const getCourseDescriptionIntentHandler = {
     canHandle(handlerInput){
        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -190,9 +185,16 @@ const getCourseDescriptionIntentHandler = {
         var speechText = course;
         return rp(options)
             .then(($)=> {
+                var options = {
+                    uri:`https://coursebook.utdallas.edu/search/searchresults/now/` + course,
+                    transform: function(body){
+                        return cheerio.load(body);
+                    }
+                  };
                 var text = $('#searchresults').text();
                 indexParen = text.indexOf('(');
                 numClassText = text.substring(indexParen+1,indexParen+2);
+                
                 speechText='There are ' + numClassText + ' sections available of ' + course;
                 return handlerInput.responseBuilder
                     .speak(speechText)
@@ -201,13 +203,11 @@ const getCourseDescriptionIntentHandler = {
             .catch((err) => {
                 console.log(err.message);
                 speechText='Sorry, I had some problems getting that course information.';
-                return handlerInput.responseBuilder
-                    .speak(speechText)
-                    .getResponse();
-            })
+                console.log(speechText);
+            });
     }
  };
- */
+ 
 
 // ******
 // END COURSE DESCRIPTIONS
@@ -321,7 +321,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         FindParkingIntentHandler,
         GetFactIntentHandler,
         getContactInfoIntentHandler,
-        //getCourseDescriptionIntentHandler,
+        getCourseDescriptionIntentHandler,
         getLocationIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
