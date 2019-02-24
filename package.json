@@ -1,0 +1,31 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "UTD alexa skill",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jalberse/UTDAlexa.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jalberse/UTDAlexa/issues"
+  },
+  "homepage": "https://github.com/jalberse/UTDAlexa#readme",
+  "dependencies": {
+    "ask-sdk": "^2.4.0",
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "ssml-builder": "^0.4.3",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.0.1"
+  }
+}
